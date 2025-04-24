@@ -19,7 +19,7 @@ public class MovimentoRepository : IMovimentoRepository
             idmovimento = idmovimento,
             idcontacorrente = entity.IdContaCorrente,
             datamovimento = DateTime.Now,
-            tipomovimento = entity.TipoMovimento,
+            tipomovimento = entity.TipoMovimento.ToUpper(),
             valor = entity.Valor
         };
 

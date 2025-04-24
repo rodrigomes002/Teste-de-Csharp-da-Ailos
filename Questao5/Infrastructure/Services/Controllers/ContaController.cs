@@ -28,7 +28,7 @@ namespace Questao5.Infrastructure.Services.Controllers
             if (model.Valor < 0)
                 return BadRequest(new Result { Mensagem = "Apenas valores positivos podem ser recebidos", Tipo = "INVALID_VALUE" });
 
-            if ((model.TipoMovimento != "C") && (model.TipoMovimento != "D"))
+            if ((model.TipoMovimento.ToUpper() != "C") && (model.TipoMovimento.ToUpper() != "D"))
                 return BadRequest(new Result { Mensagem = "Apenas os tipos “débito” ou “crédito” podem ser aceitos", Tipo = "INVALID_TYPE" });
 
             var idempotencia = await _mediator.Send(new GetIdempotenciaByIdQuery(model.ChaveIdempotencia));
