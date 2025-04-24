@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Questao1\Questao1.csproj" />
+    <ProjectReference Include="..\Questao5\Questao5.csproj" />
   </ItemGroup>
 
 </Project>

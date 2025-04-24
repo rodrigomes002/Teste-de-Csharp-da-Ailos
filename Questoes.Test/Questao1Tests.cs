@@ -2,7 +2,7 @@ using Questao1;
 
 namespace Questoes.Test;
 
-public class Questao1Test
+public class Questao1Tests
 {
     [Fact]
     public void ContaBancariaTest1()

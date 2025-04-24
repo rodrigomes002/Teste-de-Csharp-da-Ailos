@@ -1,30 +1,27 @@
 ﻿using MediatR;
-using Newtonsoft.Json;
 using Questao5.Application.Commands;
 using Questao5.Domain.Entities;
 using Questao5.Infrastructure.Repositories;
 
 namespace Questao5.Application.Handlers;
 
-public class CreateIdempotenciaCommandHandler : IRequestHandler<CreateIdempotenciaCommand>
+public class CreateMovimentoCommandHandler : IRequestHandler<CreateMovimentoCommand, string>
 {
-    private readonly IIdempotenciaRepository _idempotenciaRepository;
-    public CreateIdempotenciaCommandHandler(IIdempotenciaRepository idempotenciaRepository)
+    private readonly IMovimentoRepository _movimentoRepository;
+    public CreateMovimentoCommandHandler(IMovimentoRepository movimentoRepository)
     {
-        _idempotenciaRepository = idempotenciaRepository;
+        _movimentoRepository = movimentoRepository;
     }
 
-    public async Task<Unit> Handle(CreateIdempotenciaCommand request, CancellationToken cancellationToken)
+    public async Task<string> Handle(CreateMovimentoCommand request, CancellationToken cancellationToken)
     {
-        var idempotencia = new Idempotencia()
+        var movimento = new Movimento()
         {
-            ChaveIdempotencia = request.ChaveIdempotencia,
-            Requisicao = JsonConvert.SerializeObject(request),
-            Resultado = request.Resultado
+            IdContaCorrente = request.IdContaCorrente,
+            TipoMovimento = request.TipoMovimento,
+            Valor = request.Valor
         };
 
-        await _idempotenciaRepository.AddIdempotenciaAsync(idempotencia);
-
-        return Unit.Value;
+        return await _movimentoRepository.AddMovimentoAsync(movimento);
     }
 }
